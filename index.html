@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Резюме — Ваше Имя</title>
+  <meta name="description" content="Резюме — Ваше Имя. Чистый адаптивный HTML/CSS макет с темной темой.">
+  <style>
+    :root {
+      --bg-light: #f6f7fb;
+      --card-light: #ffffff;
+      --text-light: #111827;
+      --muted-light: #6b7280;
+      --bg-dark: #0f172a;
+      --card-dark: #1e293b;
+      --text-dark: #f1f5f9;
+      --muted-dark: #94a3b8;
+      --accent: #2b6cb0;
+      --radius: 12px;
+      --max-width: 900px;
+      --gap: 18px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    [data-theme="light"] {
+      --bg: var(--bg-light);
+      --card: var(--card-light);
+      --text: var(--text-light);
+      --muted: var(--muted-light);
+    }
+
+    [data-theme="dark"] {
+      --bg: var(--bg-dark);
+      --card: var(--card-dark);
+      --text: var(--text-dark);
+      --muted: var(--muted-dark);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      line-height: 1.4;
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .resume {
+      width: 100%;
+      max-width: var(--max-width);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(18, 38, 63, 0.08);
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: var(--gap);
+      padding: 28px;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .side {
+      padding: 16px 8px;
+      background: linear-gradient(180deg, rgba(43, 108, 176, 0.06), transparent);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .photo {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 10px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--accent), #6fb3ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .h {
+      font-weight: 700;
+      margin: 6px 0;
+      color: var(--accent);
+      font-size: 14px
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .skill .bar {
+      height: 8px;
+      background: #e6eefb;
+      border-radius: 999px;
+      overflow: hidden
+    }
+
+    [data-theme="dark"] .skill .bar {
+      background: #334155;
+    }
+
+    .skill .bar>span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), #4c9be8)
+    }
+
+    .main {
+      padding: 4px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    header .name {
+      font-size: 26px;
+      font-weight: 800;
+      margin: 0
+    }
+
+    header .title {
+      color: var(--muted);
+      margin-top: 4px
+    }
+
+    .summary {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 8px
+    }
+
+    .section {
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.01)
+    }
+
+    [data-theme="dark"] .section {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .job {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.1)
+    }
+
+    [data-theme="dark"] .job {
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(43, 108, 176, 0.09);
+      font-size: 13px;
+      color: var(--accent)
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      border: 0;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      transition: opacity 0.2s
+    }
+
+    .btn:hover {
+      opacity: 0.9
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(43, 108, 176, 0.2);
+      color: var(--accent)
+    }
+
+    @media (max-width:880px) {
+      .resume {
+        grid-template-columns: 1fr;
+        padding: 18px
+      }
+
+      .side {
+        order: 2
+      }
+
+      .main {
+        order: 1
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: black;
+        padding: 0
+      }
+
+      .resume {
+        box-shadow: none;
+        border-radius: 0;
+        max-width: 100%;
+        grid-template-columns: 1fr
+      }
+
+      .actions,
+      .photo,
+      #theme-toggle {
+        display: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <article class="resume" aria-label="Резюме">
+    <aside class="side">
+      <div class="photo">ВАШЕ<br>ФОТО</div>
+      <div class="contact">
+        <div class="h">Контакты</div>
+        <div class="muted">Домодедово</div>
+        <div class="muted">+7 (925) 302-62-92</div>
+        <div class="muted">scherbakov.kirill23@gmail.com</div>
+      </div>
+      <div class="skills">
+        <div class="h">Навыки</div>
+        <div class="list">
+          <div class="skill">
+            <div class="meta">HTML / CSS</div>
+            <div class="bar"><span style="width:45%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="meta">JavaScript</div>
+            <div class="bar"><span style="width:18%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="meta">linux</div>
+            <div class="bar"><span style="width:11%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="meta">Сети</div>
+            <div class="bar"><span style="width:13%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="meta">MySQL</div>
+            <div class="bar"><span style="width:12%"></span></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header>
+        <h1 class="name">Щербаков Кирилл Андреевич</h1>
+        <div class="title"></div>
+        <div class="actions">
+          <button class="btn" onclick="window.print()">Скачать PDF</button>
+          <button class="btn secondary" id="theme-toggle">🌙 Тёмная тема</button>
+        </div>
+      </header>
+      
+      <h2>Опыт работы</h2>
+      
+      <section class="summary section">
+        <h3 class="h">Python</h3>
+        <p class="muted">Писал и поддерживал программу для автоматической проверки и сортировке аккаунтов в инстаграме + велась база данных уже отсортированных аккаунтов</p>
+      </section>
+      <section class="summary section">
+        <h3 class="h">Криптовалюта</h3>
+        <p class="muted">Основной род деятельности заключается в анализе актуальных новостей и инфоповод, првоерке рабочих парсеров, в которые приходят последнии подписки отслеживаемых нами твиттер аккаунтов, а так же работа с Alphagate <br> Так же проходил обучение работе и анализу информации в блокчейне <br> Последнее время активно работаем с ARKHAM (сайт для углубленного анализа блокчейна)</p>
+      </section>
+      <section class="summary section">
+        <h3 class="h">Фронтенд</h3>
+        <p class="muted">3 года в свободное от других занятий время изучаю <br> Периодически подрабатываю, беру небольшие части заданий у своего знакомого фрилансера, 90 процентов всей работы что делал это была верстка страниц по готовым макетам <br> неплохо освоил HTML и CSS, однако до полноценного обучения JS-у руки так и не дошли</p>
+      </section>
+      
+      <h2>Образование</h2>
+      
+      <section class="summary section">
+        <h3 class="h">Московский Приборостроительный Техникум</h3>
+        <p class="muted">Прошел обучение на специальность Компьютерные системы и комплексы</p>
+      </section>
+      
+      <h2>Другое</h2>
+      
+      
+      <section class="summary section">
+        <h3 class="h">Ключевые навыки</h3>
+        <p class="muted">Базовые понимание и работа с Linux <br> Знание базовых утилит для диагностики и траблшутинга в linux</p>
+      </section>
+      <section class="summary section">
+        <h3 class="h">Программированеи</h3>
+        <p class="muted">Python</p>
+      </section>
+      <section class="summary section">
+        <h3 class="h">Безопастность</h3>
+        <p class="muted">Nodejs scan</p>
+      </section>
+      <section class="summary section">
+        <h3 class="h">Контейнеризация</h3>
+        <p class="muted">Понимание общих принципов контейнеризации, docker, crictl <br> описание простых Докеров-файлов, docker compose</p>
+      </section>
+      <section class="summary section">
+        <h3 class="h">Kubernetes</h3>
+        <p class="muted">Базовое понимание работы</p>
+      </section>
+      <section class="summary section">
+        <h3 class="h">Сети</h3>
+        <p class="muted">Знания ТСР/IP, UDP, OSI, DNS, NAT, NTP, IPv4 против IPv6, VPN, маршруты, метрики, iptables</p>
+      </section>
+      <section class="summary section">
+        <h3 class="h">Общие знания</h3>
+        <p class="muted">Timebased vs Eventhased, Gitops, </p>
+      </section>
+      
+      
+    </main>
+  </article>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    // Проверяем сохранённую тему или системные настройки
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = saved ? saved : (prefersDark ? 'dark' : 'light');
+    root.setAttribute('data-theme', initialTheme);
+    toggle.textContent = initialTheme === 'light' ? '🌙 Тёмная тема' : '☀️ Светлая тема';
+    // Переключение темы
+    toggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      toggle.textContent = next === 'light' ? '🌙 Тёмная тема' : '☀️ Светлая тема';
+    });
+  </script>
+</body>
+
+</html>
